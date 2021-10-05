@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/screenRegistrationsList">
+
+    <fragment
+        android:id="@+id/screenRegistrationsList"
+        android:name="com.demo.weightcard.ui.registartion.list.ScreenRegistrationsList"
+        android:label="screen_registrations_list"
+        tools:layout="@layout/screen_registrations_list" >
+        <action
+            android:id="@+id/action_screenRegistrationsList_to_screenRegistration"
+            app:destination="@id/screenRegistration" />
+    </fragment>
+    <fragment
+        android:id="@+id/screenRegistration"
+        android:name="com.demo.weightcard.ui.registartion.registration.ScreenRegistration"
+        android:label="ScreenRegistration" />
+</navigation>
