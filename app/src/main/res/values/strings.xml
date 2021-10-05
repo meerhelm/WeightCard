@@ -1,4 +1,11 @@
 <resources>
     <string name="app_name">WeightCard</string>
     <string name="field_must_not_be_empty">Must not be empty</string>
+    <string name="edit">Edit</string>
+    <string name="main_screen">Main Screen</string>
+    <string name="search">Search</string>
+    <string name="delete_items">Delete Items</string>
+    <string name="delete_items_message">Are you sure you want to remove that items?</string>
+    <string name="accept">Yes</string>
+    <string name="cancel">No</string>
 </resources>

@@ -1,8 +1,7 @@
 package com.demo.weightcard.logic.interactor
 
-import com.demo.weightcard.model.Profile
 import com.demo.weightcard.data.repository.ProfileRepository
-import com.demo.weightcard.data.repository.RegistrationRepository
+import com.demo.weightcard.model.Profile
 import kotlin.random.Random
 
 class RegistrationInteractor(

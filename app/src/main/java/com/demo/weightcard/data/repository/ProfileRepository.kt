@@ -27,7 +27,7 @@ class ProfileRepository(
                 profile.id,
                 profile.weight,
                 profile.birthday,
-                saveBitmapToFile(profile.face).path
+                saveBitmapToFile(profile.face).path ?: ""
             )
             it.insert(profileEntity)
         }
@@ -81,8 +81,25 @@ class ProfileRepository(
         TODO("Not yet implemented")
     }
 
-    fun removeProfile(profile: Profile) {
-        realm.where(ProfileEntity::class.java)
+    suspend fun removeProfile(profile: Profile) {
+        realm.executeTransactionAwait {
+            realm.where(ProfileEntity::class.java).equalTo("id", profile.id).findFirst()
+                ?.deleteFromRealm()
+        }
+    }
+
+    suspend fun filterProfiles(searchString: String): List<Profile> =
+        withContext(Dispatchers.Main) {
+            realm.where(ProfileEntity::class.java)?.findAll()
+                ?.filter { it.weight.contains(searchString, true) }
+                ?.mapNotNull { mapEntityToProfile(it) }!!.toList()
+        }
+
+    suspend fun removeProfilesById(id: Long) {
+        realm.executeTransactionAwait {
+            realm.where(ProfileEntity::class.java).equalTo("id", id).findFirst()
+                ?.deleteFromRealm()
+        }
     }
 
 }

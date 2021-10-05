@@ -6,9 +6,9 @@ import kotlin.random.Random
 
 open class ProfileEntity(
     @PrimaryKey var id: Long,
-    var weight: String? = null,
-    var birthday: String? = null,
-    var face: String? = null,
+    var weight: String = "",
+    var birthday: String = "",
+    var face: String = "",
 ) : RealmObject() {
     constructor() : this(id = Random.nextLong())
 }

@@ -1,28 +1,84 @@
 package com.demo.weightcard.ui.registartion.list
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
+import androidx.core.view.isVisible
+import androidx.core.widget.doAfterTextChanged
+import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.LinearLayoutManager
+import by.kirich1409.viewbindingdelegate.viewBinding
 import com.demo.weightcard.R
+import com.demo.weightcard.databinding.ScreenRegistrationsListBinding
+import com.demo.weightcard.ui.registartion.list.recycler.ProfileAdapter
+import com.demo.weightcard.ui.registartion.list.recycler.ProfileInfoListItem
+import com.demo.weightcard.ui.registartion.list.recycler.ProfilesItemTouchHelperCallback
+import com.demo.weightcard.ui.registartion.registration.ScreenRegistration
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class ScreenRegistrationsList : Fragment() {
 
-    private lateinit var viewModel: ScreenRegistrationsListViewModel
+class ScreenRegistrationsList : Fragment(R.layout.screen_registrations_list) {
+    private val binding by viewBinding(ScreenRegistrationsListBinding::bind)
+    private val viewModel by viewModel<ScreenRegistrationsListViewModel>()
+    private val adapter = ProfileAdapter(
+        emptyList(),
+        this::onItemSelected,
+        this::onProfileLongClicked,
+        this::onItemDismissed,
+        this::onEditItem
+    )
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.screen_registrations_list, container, false)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.profilesRecyclerView.adapter = adapter
+        binding.profilesRecyclerView.layoutManager =
+            LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        viewModel.loadProfiles()
+        viewModel.profiles.observe(viewLifecycleOwner) {
+            adapter.updateItems(it)
+        }
+        initBottomBar()
+        initSearchView()
+        val callback = ProfilesItemTouchHelperCallback(adapter)
+        ItemTouchHelper(callback).attachToRecyclerView(binding.profilesRecyclerView)
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(ScreenRegistrationsListViewModel::class.java)
-        // TODO: Use the ViewModel
+
+    private fun onItemSelected(profileInfo: ProfileInfoListItem) {
+        viewModel.onItemSelectionChanged(profileInfo)
     }
 
+    private fun onProfileLongClicked(profileInfo: ProfileInfoListItem) {
+        viewModel.selectAllRecords()
+    }
+
+    private fun onItemDismissed(profileInfo: ProfileInfoListItem) {
+        viewModel.deleteItem(profileInfo)
+    }
+
+    private fun onEditItem(profileInfo: ProfileInfoListItem) {
+        findNavController().navigate(
+            R.id.screenRegistration,
+            ScreenRegistration.createBundle(profileInfo.id)
+        )
+    }
+
+    private fun initBottomBar() {
+        viewModel.allItemsSelected.observe(
+            viewLifecycleOwner
+        ) {
+            binding.idSelectAllCheckbox.isChecked = it
+            binding.idSelectAllCheckbox.isVisible = true
+        }
+        binding.idSelectAllCheckbox.setOnClickListener { _ ->
+            viewModel.allItemsSelectionChange(binding.idSelectAllCheckbox.isChecked)
+        }
+    }
+
+    private fun initSearchView() {
+        binding.searchEditText.doAfterTextChanged {
+            viewModel.updateSearchQuery(it.toString())
+        }
+    }
 }

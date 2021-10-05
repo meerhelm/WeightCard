@@ -47,8 +47,8 @@ class RegistrationViewModel(
     fun saveProfileAndClose(
         registrationNavigator: RegistrationNavigator,
         parentFragment: Fragment?,
-        weight: String?,
-        birthday: String?,
+        weight: String,
+        birthday: String,
         photo: Bitmap?,
     ) = viewModelScope.launch {
         isLoadingVisible.value = true
