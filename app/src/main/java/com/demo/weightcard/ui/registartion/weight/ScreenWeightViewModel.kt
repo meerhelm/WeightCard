@@ -1,16 +1,21 @@
 package com.demo.weightcard.ui.registartion.weight
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.MutableLiveData
 import com.demo.weightcard.logic.registration_flow.RegistrationViewModelDelegate
 import com.demo.weightcard.model.Profile
 
-class ScreenWeightViewModel (profile: Profile? = null) : RegistrationViewModelDelegate() {
+class ScreenWeightViewModel(profile: Profile? = null) : RegistrationViewModelDelegate() {
+    val weight = MutableLiveData<String>(profile?.weight)
+    val units = MutableLiveData<String>(profile?.units)
+
     override fun isAllFieldsValid(): Boolean {
-        TODO("Not yet implemented")
+        return getAllLiveData()
+            .filterIsInstance<MutableLiveData<String>>()
+            .none { it.value?.isEmpty() == true }
     }
 
     override fun getAllLiveData(): List<LiveData<out Any>> {
-        TODO("Not yet implemented")
+        return listOf(weight, units)
     }
 }

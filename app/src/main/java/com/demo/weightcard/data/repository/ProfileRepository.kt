@@ -72,6 +72,7 @@ class ProfileRepository(
                 id,
                 weight,
                 birthday,
+                units,
                 readBitmapFromFile(face)
             )
         }

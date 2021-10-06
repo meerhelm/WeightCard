@@ -10,7 +10,6 @@ import com.demo.weightcard.R
 class ProfileViewHolder(
     private val view: View,
     private val onItemSelected: (profile: ProfileInfoListItem) -> Unit,
-    private val onProfileLongClick: (profile: ProfileInfoListItem) -> Unit,
     private val onDeleteItemClicked: (profile: ProfileInfoListItem) -> Unit,
     private val onEditItemClicked: (profile: ProfileInfoListItem) -> Unit
 ) :
@@ -29,10 +28,6 @@ class ProfileViewHolder(
         profileItemCheckbox.isChecked = profile.itemSelected
         profileItemCheckbox.setOnClickListener {
             onItemSelected.invoke(profile)
-        }
-        view.setOnLongClickListener {
-            onProfileLongClick.invoke(profile)
-            true
         }
         editButton.setOnClickListener {
             onEditItemClicked.invoke(profile)

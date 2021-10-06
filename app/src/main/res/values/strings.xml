@@ -8,4 +8,6 @@
     <string name="delete_items_message">Are you sure you want to remove that items?</string>
     <string name="accept">Yes</string>
     <string name="cancel">No</string>
+    <string name="kg">KG</string>
+    <string name="lb">LB</string>
 </resources>

@@ -49,6 +49,7 @@ class RegistrationViewModel(
         parentFragment: Fragment?,
         weight: String,
         birthday: String,
+        units:String,
         photo: Bitmap?,
     ) = viewModelScope.launch {
         isLoadingVisible.value = true
@@ -59,6 +60,7 @@ class RegistrationViewModel(
             id.value!!,
             weight,
             birthday,
+            units,
             photo
         )
         registrationInteractor.writeProfile(profile)

@@ -1,32 +1,49 @@
 package com.demo.weightcard.ui.registartion.weight
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
+import android.view.WindowManager
+import android.widget.EditText
+import androidx.core.widget.addTextChangedListener
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.MutableLiveData
+import by.kirich1409.viewbindingdelegate.viewBinding
 import com.demo.weightcard.R
+import com.demo.weightcard.databinding.ScreenWeightBinding
+import com.demo.weightcard.ui.registartion.RegistrationNavigator
+import com.demo.weightcard.utils.registrationViewModelDelegate
 
-class ScreenWeight : Fragment() {
+class ScreenWeight : Fragment(R.layout.screen_weight) {
+    private val binding by viewBinding(ScreenWeightBinding::bind)
+    private val viewModel by registrationViewModelDelegate<ScreenWeightViewModel>()
+    private val registrationNavigator = RegistrationNavigator()
 
-    companion object {
-        fun newInstance() = ScreenWeight()
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        activity?.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
+        bindListeners()
     }
 
-    private lateinit var viewModel: ScreenWeightViewModel
+    private fun bindListeners() {
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.screen_weight, container, false)
+        bindEditTextToViewModel(viewModel.weight, binding.weight)
+        binding.nextScreen.setOnClickListener {
+            if (viewModel.isAllFieldsValid())
+                registrationNavigator.moveToNextScreen(parentFragment)
+        }
+        binding.prevScreen.setOnClickListener {
+            registrationNavigator.moveToPreviousScreen(parentFragment)
+        }
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(ScreenWeightViewModel::class.java)
-        // TODO: Use the ViewModel
+    private fun bindEditTextToViewModel(liveData: MutableLiveData<String>?, editText: EditText) {
+        liveData?.observe(viewLifecycleOwner) {
+            if (it != editText.text.toString()) {
+                editText.setText(it)
+            }
+        }
+        editText.addTextChangedListener {
+            liveData?.value = it?.toString()
+        }
     }
-
 }

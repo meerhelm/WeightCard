@@ -1,5 +1,6 @@
 package com.demo.weightcard.data.entity
 
+import com.demo.weightcard.logic.Units
 import io.realm.RealmObject
 import io.realm.annotations.PrimaryKey
 import kotlin.random.Random
@@ -7,6 +8,7 @@ import kotlin.random.Random
 open class ProfileEntity(
     @PrimaryKey var id: Long,
     var weight: String = "",
+    var units: String = Units.KG,
     var birthday: String = "",
     var face: String = "",
 ) : RealmObject() {

@@ -24,7 +24,6 @@ class ScreenRegistrationsList : Fragment(R.layout.screen_registrations_list) {
     private val adapter = ProfileAdapter(
         emptyList(),
         this::onItemSelected,
-        this::onProfileLongClicked,
         this::onItemDismissed,
         this::onEditItem
     )
@@ -49,10 +48,6 @@ class ScreenRegistrationsList : Fragment(R.layout.screen_registrations_list) {
         viewModel.onItemSelectionChanged(profileInfo)
     }
 
-    private fun onProfileLongClicked(profileInfo: ProfileInfoListItem) {
-        viewModel.selectAllRecords()
-    }
-
     private fun onItemDismissed(profileInfo: ProfileInfoListItem) {
         viewModel.deleteItem(profileInfo)
     }
@@ -65,15 +60,10 @@ class ScreenRegistrationsList : Fragment(R.layout.screen_registrations_list) {
     }
 
     private fun initBottomBar() {
-        viewModel.allItemsSelected.observe(
-            viewLifecycleOwner
-        ) {
-            binding.idSelectAllCheckbox.isChecked = it
-            binding.idSelectAllCheckbox.isVisible = true
-        }
-        binding.idSelectAllCheckbox.setOnClickListener { _ ->
-            viewModel.allItemsSelectionChange(binding.idSelectAllCheckbox.isChecked)
-        }
+       binding.add.setOnClickListener {
+           activity?.viewModelStore?.clear()
+           findNavController().navigate(R.id.action_screenMain_to_screenRegistration)
+       }
     }
 
     private fun initSearchView() {

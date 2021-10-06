@@ -6,28 +6,6 @@
     android:background="@color/white"
     android:orientation="vertical">
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/green"
-            app:titleTextColor="@color/white"
-            app:title="@string/main_screen" />
-
-        <androidx.appcompat.widget.AppCompatCheckBox
-            android:id="@+id/id_selectAllCheckbox"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end|center_vertical"
-            android:buttonTint="@color/white"
-            android:layout_marginEnd="16dp"
-            android:gravity="center" />
-    </FrameLayout>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -72,6 +50,11 @@
             android:layout_weight="1"
             android:background="@android:color/transparent">
 
+            <Button
+                android:id="@+id/add"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Add new" />
         </FrameLayout>
     </LinearLayout>
 

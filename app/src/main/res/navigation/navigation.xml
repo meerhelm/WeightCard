@@ -11,7 +11,7 @@
         android:label="screen_registrations_list"
         tools:layout="@layout/screen_registrations_list" >
         <action
-            android:id="@+id/action_screenRegistrationsList_to_screenRegistration"
+            android:id="@+id/action_screenMain_to_screenRegistration"
             app:destination="@id/screenRegistration" />
     </fragment>
     <fragment
