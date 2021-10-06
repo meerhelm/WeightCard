@@ -15,4 +15,7 @@
     <string name="birthday">Birthday</string>
     <string name="weight">Weight</string>
     <string name="photo">photo</string>
+    <string name="back">BACK</string>
+    <string name="next">NEXT</string>
+    <string name="add_client">ADD CLIENT</string>
 </resources>

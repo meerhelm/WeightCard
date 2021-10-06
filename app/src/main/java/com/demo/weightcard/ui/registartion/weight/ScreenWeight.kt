@@ -3,13 +3,11 @@ package com.demo.weightcard.ui.registartion.weight
 import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
-import android.widget.EditText
-import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.MutableLiveData
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.demo.weightcard.R
 import com.demo.weightcard.databinding.ScreenWeightBinding
+import com.demo.weightcard.logic.Units
 import com.demo.weightcard.ui.registartion.RegistrationNavigator
 import com.demo.weightcard.utils.bindEditTextToViewModel
 import com.demo.weightcard.utils.registrationViewModelDelegate
@@ -33,6 +31,29 @@ class ScreenWeight : Fragment(R.layout.screen_weight) {
         }
         binding.prevScreen.setOnClickListener {
             registrationNavigator.moveToPreviousScreen(parentFragment)
+        }
+        binding.units.setOnCheckedChangeListener { _, checkedId ->
+            when (checkedId) {
+                R.id.kg -> viewModel.units.value = Units.KG
+                R.id.lb -> viewModel.units.value = Units.LB
+            }
+        }
+        viewModel.units.observe(viewLifecycleOwner) {
+            if ((it == Units.KG && binding.kg.isSelected) &&
+                (it == Units.LB && binding.lb.isSelected)
+            )
+                return@observe
+            when (it) {
+                Units.KG -> {
+                    binding.kg.isChecked = true
+                    binding.lb.isChecked = false
+                }
+                else -> {
+                    binding.kg.isChecked = false
+                    binding.lb.isChecked = true
+                }
+            }
+
         }
     }
 
