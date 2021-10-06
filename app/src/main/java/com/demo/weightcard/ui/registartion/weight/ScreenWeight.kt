@@ -21,6 +21,7 @@ class ScreenWeight : Fragment(R.layout.screen_weight) {
         super.onViewCreated(view, savedInstanceState)
         activity?.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
         bindListeners()
+        requireActivity().title = getString(R.string.title_weight)
     }
 
     private fun bindListeners() {

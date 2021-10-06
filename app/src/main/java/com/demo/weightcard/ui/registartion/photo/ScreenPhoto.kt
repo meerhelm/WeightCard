@@ -99,6 +99,7 @@ class ScreenPhoto : Fragment(R.layout.screen_photo) {
                 if (!it.isNullOrEmpty()) binding.photoImageView.setImageURI(Uri.parse(it))
             })
         bindListeners()
+        requireActivity().title = getString(R.string.title_photo)
     }
 
     private fun bindListeners() {

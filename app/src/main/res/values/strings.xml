@@ -2,7 +2,7 @@
     <string name="app_name">WeightCard</string>
     <string name="field_must_not_be_empty">Must not be empty</string>
     <string name="edit">Edit</string>
-    <string name="main_screen">Main Screen</string>
+    <string name="title_main_screen">Main Screen</string>
     <string name="search">Search</string>
     <string name="delete_items">Delete Items</string>
     <string name="delete_items_message">Are you sure you want to remove that items?</string>
@@ -18,4 +18,7 @@
     <string name="back">BACK</string>
     <string name="next">NEXT</string>
     <string name="add_client">ADD CLIENT</string>
+    <string name="title_birthday">Select Date of Birth</string>
+    <string name="title_photo">Photo</string>
+    <string name="title_weight">Enter Body Weight</string>
 </resources>

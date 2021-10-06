@@ -20,6 +20,7 @@ class ScreenBirthday : Fragment(R.layout.screen_birthday) {
         super.onViewCreated(view, savedInstanceState)
         activity?.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
         bindListeners()
+        requireActivity().title = getString(R.string.title_birthday)
     }
 
     private fun bindListeners() {

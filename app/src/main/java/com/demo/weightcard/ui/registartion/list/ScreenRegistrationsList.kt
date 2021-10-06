@@ -39,6 +39,7 @@ class ScreenRegistrationsList : Fragment(R.layout.screen_registrations_list) {
         initSearchView()
         val callback = ProfilesItemTouchHelperCallback(adapter)
         ItemTouchHelper(callback).attachToRecyclerView(binding.profilesRecyclerView)
+        requireActivity().title = getString(R.string.title_main_screen)
     }
 
 
