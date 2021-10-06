@@ -17,14 +17,6 @@ class ScreenRegistrationsListViewModel(private val profileRepository: ProfileRep
 
     val profiles = MutableLiveData<List<ProfileInfoListItem>>()
 
-    val deleteButtonVisible = profiles.map { profiles ->
-        profiles.any { it.itemSelected }
-    }
-    val allItemsSelected = profiles.map { it.all { item -> item.itemSelected } }
-
-    val selectedItemsCount: Int?
-        get() = profiles.value?.count { it.itemSelected }
-
     private val searchQueryFlowMutable = MutableSharedFlow<String>()
 
     fun loadProfiles() = viewModelScope.launch {
@@ -47,34 +39,13 @@ class ScreenRegistrationsListViewModel(private val profileRepository: ProfileRep
         selectionModeEnabled = false,
         itemSelected = false,
         photo = profileInfo.face,
+        units = profileInfo.units
     )
-
-    fun onItemSelectionChanged(profileInfoListItem: ProfileInfoListItem) {
-        profiles.value = profiles.value?.map {
-            if (profileInfoListItem.id == it.id) {
-                it.copy(itemSelected = !it.itemSelected)
-            } else {
-                it
-            }
-        }
-    }
-
-    fun selectAllRecords() {
-        profiles.value = profiles.value?.map {
-            it.copy(itemSelected = true)
-        }
-    }
 
 
     fun deleteItem(profile: ProfileInfoListItem) = viewModelScope.launch {
         profileRepository.removeProfilesById(profile.id)
         loadProfiles()
-    }
-
-    fun allItemsSelectionChange(isSelected: Boolean) {
-        profiles.value = profiles.value?.map {
-            it.copy(itemSelected = isSelected)
-        }
     }
 
     fun updateSearchQuery(newText: String) = viewModelScope.launch {

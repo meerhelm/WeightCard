@@ -12,7 +12,4 @@ class RegistrationNavigator {
         (parentFragment as? ScreenRegistration)?.moveToPreviousScreen()
     }
 
-    fun blockSwipeNavigation(parentFragment: Fragment?) {
-        (parentFragment as? ScreenRegistration)?.blockSwipeNavigation()
-    }
 }

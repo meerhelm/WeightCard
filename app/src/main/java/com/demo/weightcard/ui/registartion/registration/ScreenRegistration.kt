@@ -20,7 +20,6 @@ class ScreenRegistration : Fragment(R.layout.screen_registration) {
     private val binding by viewBinding(ScreenRegistrationBinding::bind)
 
     companion object {
-        const val TAG = "registration_screen"
         private const val PROFILE_ID_KEY = "profile_id"
 
         fun createBundle(profileId: Long) = Bundle().apply {
