@@ -91,7 +91,4 @@ class ScreenRegistration : Fragment(R.layout.screen_registration) {
         }
     }
 
-    fun blockSwipeNavigation() {
-        binding.viewPager.isUserInputEnabled = false
-    }
 }
