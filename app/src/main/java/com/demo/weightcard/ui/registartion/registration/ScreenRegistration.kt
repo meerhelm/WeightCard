@@ -56,6 +56,7 @@ class ScreenRegistration : Fragment(R.layout.screen_registration) {
         }
         binding.viewPager.isNestedScrollingEnabled = true
         binding.viewPager.adapter = adapter
+        binding.dotsIndicator.setViewPager2(binding.viewPager)
         binding.viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
