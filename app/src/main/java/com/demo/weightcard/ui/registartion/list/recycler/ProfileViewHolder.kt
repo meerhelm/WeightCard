@@ -9,7 +9,7 @@ import com.demo.weightcard.R
 
 class ProfileViewHolder(
     private val view: View,
-    private val onEditItemClicked: (profile: ProfileInfoListItem) -> Unit
+    private val onEditItemClicked: (profile: ProfileInfoListItem) -> Unit,
 ) :
     RecyclerView.ViewHolder(view) {
     private val photo = view.findViewById<ImageView>(R.id.photo)

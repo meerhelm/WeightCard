@@ -49,7 +49,7 @@ class ProfileRepository(
 
     suspend fun removeProfile(profile: Profile) {
         realm.executeTransactionAwait {
-            realm.where(ProfileEntity::class.java).equalTo("id", profile.id).findFirst()
+            it.where(ProfileEntity::class.java).equalTo("id", profile.id).findFirst()
                 ?.deleteFromRealm()
         }
     }
@@ -63,7 +63,7 @@ class ProfileRepository(
 
     suspend fun removeProfilesById(id: Long) {
         realm.executeTransactionAwait {
-            realm.where(ProfileEntity::class.java).equalTo("id", id).findFirst()
+            it.where(ProfileEntity::class.java).equalTo("id", id).findFirst()
                 ?.deleteFromRealm()
         }
     }

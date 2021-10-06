@@ -2,7 +2,6 @@ package com.demo.weightcard.ui.registartion.list
 
 import android.os.Bundle
 import android.view.View
-import androidx.core.view.isVisible
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -23,7 +22,6 @@ class ScreenRegistrationsList : Fragment(R.layout.screen_registrations_list) {
     private val viewModel by viewModel<ScreenRegistrationsListViewModel>()
     private val adapter = ProfileAdapter(
         emptyList(),
-        this::onItemSelected,
         this::onItemDismissed,
         this::onEditItem
     )
@@ -44,10 +42,6 @@ class ScreenRegistrationsList : Fragment(R.layout.screen_registrations_list) {
     }
 
 
-    private fun onItemSelected(profileInfo: ProfileInfoListItem) {
-        viewModel.onItemSelectionChanged(profileInfo)
-    }
-
     private fun onItemDismissed(profileInfo: ProfileInfoListItem) {
         viewModel.deleteItem(profileInfo)
     }
@@ -60,10 +54,10 @@ class ScreenRegistrationsList : Fragment(R.layout.screen_registrations_list) {
     }
 
     private fun initBottomBar() {
-       binding.add.setOnClickListener {
-           activity?.viewModelStore?.clear()
-           findNavController().navigate(R.id.action_screenMain_to_screenRegistration)
-       }
+        binding.add.setOnClickListener {
+            activity?.viewModelStore?.clear()
+            findNavController().navigate(R.id.action_screenMain_to_screenRegistration)
+        }
     }
 
     private fun initSearchView() {

@@ -7,11 +7,6 @@ import com.demo.weightcard.model.Profile
 
 class ScreenBirthdayViewModel (profile: Profile? = null) : RegistrationViewModelDelegate() {
     val birthday = MutableLiveData<String>(profile?.weight)
-    override fun isAllFieldsValid(): Boolean {
-        return getAllLiveData()
-            .filterIsInstance<MutableLiveData<String>>()
-            .none { it.value?.isEmpty() == true }
-    }
 
     override fun getAllLiveData(): List<LiveData<out Any>> {
        return listOf(birthday)

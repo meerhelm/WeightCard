@@ -1,7 +1,5 @@
 package com.demo.weightcard.ui.registartion.photo
 
-import android.graphics.Bitmap
-import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.demo.weightcard.logic.registration_flow.RegistrationViewModelDelegate
@@ -14,10 +12,6 @@ class ScreenPhotoViewModel(profile: Profile? = null) : RegistrationViewModelDele
         profile?.face.let {
             face.value = it
         }
-    }
-
-    override fun isAllFieldsValid(): Boolean {
-        return face.value != null
     }
 
     override fun getAllLiveData(): List<LiveData<out Any>> {

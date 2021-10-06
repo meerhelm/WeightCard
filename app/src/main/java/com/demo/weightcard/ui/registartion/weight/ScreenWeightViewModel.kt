@@ -9,12 +9,6 @@ class ScreenWeightViewModel(profile: Profile? = null) : RegistrationViewModelDel
     val weight = MutableLiveData<String>(profile?.weight)
     val units = MutableLiveData<String>(profile?.units)
 
-    override fun isAllFieldsValid(): Boolean {
-        return getAllLiveData()
-            .filterIsInstance<MutableLiveData<String>>()
-            .none { it.value?.isEmpty() == true }
-    }
-
     override fun getAllLiveData(): List<LiveData<out Any>> {
         return listOf(weight, units)
     }

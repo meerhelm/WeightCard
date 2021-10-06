@@ -7,7 +7,6 @@ import com.demo.weightcard.R
 
 class ProfileAdapter(
     private var items: List<ProfileInfoListItem>,
-    private val onItemSelected: (profile: ProfileInfoListItem) -> Unit,
     private val onProfileDismissed: (profile: ProfileInfoListItem) -> Unit,
     private val onEditProfileClicked: (profile: ProfileInfoListItem) -> Unit
 ) : RecyclerView.Adapter<ProfileViewHolder>(), HelperAdapter {
@@ -16,7 +15,7 @@ class ProfileAdapter(
             .inflate(R.layout.item_profile, parent, false)
         return ProfileViewHolder(
             view,
-            onItemSelected,
+            onEditProfileClicked,
         )
     }
 

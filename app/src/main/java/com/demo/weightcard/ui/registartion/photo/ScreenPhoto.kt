@@ -35,7 +35,7 @@ class ScreenPhoto : Fragment(R.layout.screen_photo) {
         registerForActivityResult(ActivityResultContracts.TakePicture()) { isSuccess ->
             if (isSuccess) {
                 latestTmpUri?.let {
-                    viewModel.face.value = "content://com.demo.weightcard.provider" + it.path
+                    viewModel.face.value = it.toString()
                 }
             }
         }
@@ -49,7 +49,7 @@ class ScreenPhoto : Fragment(R.layout.screen_photo) {
         }
     private val selectImageFromGalleryResult =
         registerForActivityResult(ActivityResultContracts.GetContent()) {
-            it?.let { viewModel.face.value = it.path }
+            it?.let { viewModel.face.value = it.toString() }
         }
 
     private fun requestCamera() {
