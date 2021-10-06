@@ -10,4 +10,6 @@
     <string name="cancel">No</string>
     <string name="kg">KG</string>
     <string name="lb">LB</string>
+    <string name="photo_name_1">Photo</string>
+    <string name="press_capture_to_start">Press capture or select from galary</string>
 </resources>

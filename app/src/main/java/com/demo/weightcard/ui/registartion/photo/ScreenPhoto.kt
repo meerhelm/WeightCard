@@ -1,32 +1,35 @@
 package com.demo.weightcard.ui.registartion.photo
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
+import android.view.WindowManager
+import androidx.fragment.app.Fragment
+import by.kirich1409.viewbindingdelegate.viewBinding
 import com.demo.weightcard.R
+import com.demo.weightcard.databinding.ScreenPhotoBinding
+import com.demo.weightcard.ui.registartion.RegistrationNavigator
+import com.demo.weightcard.utils.registrationViewModelDelegate
 
-class ScreenPhoto : Fragment() {
+class ScreenPhoto : Fragment(R.layout.screen_photo) {
+    private val binding by viewBinding(ScreenPhotoBinding::bind)
+    private val viewModel by registrationViewModelDelegate<ScreenPhotoViewModel>()
+    private val registrationNavigator = RegistrationNavigator()
 
-    companion object {
-        fun newInstance() = ScreenPhoto()
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        activity?.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
+        bindListeners()
     }
 
-    private lateinit var viewModel: ScreenPhotoViewModel
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.screen_photo, container, false)
+    private fun bindListeners() {
+        binding.gallery.setOnClickListener { }
+        binding.camera.setOnClickListener { }
+        binding.nextScreen.setOnClickListener {
+            if (viewModel.isAllFieldsValid())
+                registrationNavigator.moveToNextScreen(parentFragment)
+        }
+        binding.prevScreen.setOnClickListener {
+            registrationNavigator.moveToPreviousScreen(parentFragment)
+        }
     }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(ScreenPhotoViewModel::class.java)
-        // TODO: Use the ViewModel
-    }
-
 }
