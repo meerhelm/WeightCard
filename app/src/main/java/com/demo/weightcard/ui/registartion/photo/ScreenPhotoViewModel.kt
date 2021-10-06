@@ -1,13 +1,14 @@
 package com.demo.weightcard.ui.registartion.photo
 
 import android.graphics.Bitmap
+import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.demo.weightcard.logic.registration_flow.RegistrationViewModelDelegate
 import com.demo.weightcard.model.Profile
 
 class ScreenPhotoViewModel(profile: Profile? = null) : RegistrationViewModelDelegate() {
-    val face = MutableLiveData<Bitmap>()
+    val face = MutableLiveData<String>()
 
     init {
         profile?.face.let {

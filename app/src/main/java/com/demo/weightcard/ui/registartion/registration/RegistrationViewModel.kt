@@ -50,7 +50,7 @@ class RegistrationViewModel(
         weight: String,
         birthday: String,
         units:String,
-        photo: Bitmap?,
+        photo: String,
     ) = viewModelScope.launch {
         isLoadingVisible.value = true
         var intFingerId = 0

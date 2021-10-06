@@ -27,34 +27,13 @@ class ProfileRepository(
                 profile.id,
                 profile.weight,
                 profile.birthday,
-                saveBitmapToFile(profile.face).path ?: ""
+                profile.face
             )
             it.insert(profileEntity)
         }
     }
 
-    private fun saveBitmapToFile(bitmap: Bitmap?): Uri {
-        if (bitmap == null) return Uri.EMPTY
-        // Get the context wrapper
-        val wrapper = ContextWrapper(context.applicationContext)
 
-        // Initialize a new file instance to save bitmap object
-        var file = wrapper.getDir("Images", Context.MODE_PRIVATE)
-        file = File(file, "${UUID.randomUUID()}.jpg")
-
-        try {
-            // Compress the bitmap and save in jpg format
-            val stream: OutputStream = FileOutputStream(file)
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream)
-            stream.flush()
-            stream.close()
-        } catch (e: IOException) {
-            e.printStackTrace()
-        }
-
-        // Return the saved bitmap uri
-        return Uri.parse(file.absolutePath)
-    }
 
     suspend fun getProfile(profileId: Long): Profile? = withContext(Dispatchers.Main) {
         realm.where(ProfileEntity::class.java)?.equalTo("id", profileId)
@@ -73,7 +52,7 @@ class ProfileRepository(
                 weight,
                 birthday,
                 units,
-                readBitmapFromFile(face)
+                face
             )
         }
     }

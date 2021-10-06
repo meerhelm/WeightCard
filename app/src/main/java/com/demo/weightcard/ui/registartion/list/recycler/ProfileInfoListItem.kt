@@ -8,5 +8,5 @@ data class ProfileInfoListItem(
     val birthday: String?,
     val selectionModeEnabled: Boolean,
     val itemSelected: Boolean,
-    val photo: Bitmap?,
+    val photo: String?,
 )
