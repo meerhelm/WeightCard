@@ -6,6 +6,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.demo.weightcard.R
+import java.text.SimpleDateFormat
 
 class ProfileViewHolder(
     view: View,
@@ -20,7 +21,8 @@ class ProfileViewHolder(
     fun bindProfile(profile: ProfileInfoListItem) {
         val weightText = profile.weight + profile.units
         weight.text = weightText
-        birthday.text = profile.birthday
+        val formatter = SimpleDateFormat.getDateInstance()
+        birthday.text = formatter.format(profile.birthday)
         photo.setImageURI(Uri.parse(profile.photo))
         editButton.setOnClickListener {
             onEditItemClicked.invoke(profile)

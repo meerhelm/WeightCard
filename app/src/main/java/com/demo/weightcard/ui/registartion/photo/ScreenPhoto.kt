@@ -110,7 +110,7 @@ class ScreenPhoto : Fragment(R.layout.screen_photo) {
                     registrationNavigator,
                     parentFragment,
                     weightViewModel.weight.value ?: "",
-                    birthdayViewModel.birthday.value ?: "",
+                    birthdayViewModel.birthday.value ?: 0,
                     weightViewModel.units.value ?: "",
                     viewModel.face.value ?: ""
                 )

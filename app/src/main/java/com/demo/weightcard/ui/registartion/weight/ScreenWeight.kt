@@ -11,6 +11,7 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.demo.weightcard.R
 import com.demo.weightcard.databinding.ScreenWeightBinding
 import com.demo.weightcard.ui.registartion.RegistrationNavigator
+import com.demo.weightcard.utils.bindEditTextToViewModel
 import com.demo.weightcard.utils.registrationViewModelDelegate
 
 class ScreenWeight : Fragment(R.layout.screen_weight) {
@@ -35,14 +36,5 @@ class ScreenWeight : Fragment(R.layout.screen_weight) {
         }
     }
 
-    private fun bindEditTextToViewModel(liveData: MutableLiveData<String>?, editText: EditText) {
-        liveData?.observe(viewLifecycleOwner) {
-            if (it != editText.text.toString()) {
-                editText.setText(it)
-            }
-        }
-        editText.addTextChangedListener {
-            liveData?.value = it?.toString()
-        }
-    }
 }
+

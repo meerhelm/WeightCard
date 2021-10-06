@@ -47,7 +47,7 @@ class RegistrationViewModel(
         registrationNavigator: RegistrationNavigator,
         parentFragment: Fragment?,
         weight: String,
-        birthday: String,
+        birthday: Long,
         units: String,
         photo: String,
     ) = viewModelScope.launch {

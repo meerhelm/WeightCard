@@ -9,7 +9,7 @@ import com.demo.weightcard.logic.registration_flow.steps.WeightStep
 data class Profile(
     val id: Long,
     val weight: String = "",
-    val birthday: String = "",
+    val birthday: Long = 0L,
     val units: String = Units.KG,
     val face: String = "",
 ) {

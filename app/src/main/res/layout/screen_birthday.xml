@@ -6,16 +6,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.registartion.weight.ScreenWeight">
 
-    <EditText
+    <DatePicker
         android:id="@+id/birthday"
         android:layout_height="wrap_content"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_margin="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:importantForAutofill="no"
-        android:inputType="date" />
+        android:datePickerMode="calendar" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/bottom_bar"
