@@ -25,7 +25,7 @@ class ScreenBirthday : Fragment(R.layout.screen_birthday) {
     }
 
     private fun bindListeners() {
-        bindEditTextToViewModel(viewModel.weight, binding.birthday)
+        bindEditTextToViewModel(viewModel.birthday, binding.birthday)
         binding.nextScreen.setOnClickListener {
             if (viewModel.isAllFieldsValid())
                 registrationNavigator.moveToNextScreen(parentFragment)

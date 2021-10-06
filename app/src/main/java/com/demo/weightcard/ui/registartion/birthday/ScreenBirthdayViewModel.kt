@@ -2,12 +2,11 @@ package com.demo.weightcard.ui.registartion.birthday
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.demo.weightcard.logic.registration_flow.RegistrationViewModelDelegate
 import com.demo.weightcard.model.Profile
 
 class ScreenBirthdayViewModel (profile: Profile? = null) : RegistrationViewModelDelegate() {
-    val weight = MutableLiveData<String>(profile?.weight)
+    val birthday = MutableLiveData<String>(profile?.weight)
     override fun isAllFieldsValid(): Boolean {
         return getAllLiveData()
             .filterIsInstance<MutableLiveData<String>>()
@@ -15,7 +14,7 @@ class ScreenBirthdayViewModel (profile: Profile? = null) : RegistrationViewModel
     }
 
     override fun getAllLiveData(): List<LiveData<out Any>> {
-       return listOf(weight)
+       return listOf(birthday)
     }
 
 }

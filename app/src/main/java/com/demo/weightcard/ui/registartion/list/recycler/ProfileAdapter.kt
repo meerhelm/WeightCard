@@ -17,8 +17,6 @@ class ProfileAdapter(
         return ProfileViewHolder(
             view,
             onItemSelected,
-            onProfileDismissed,
-            onEditProfileClicked
         )
     }
 

@@ -1,6 +1,5 @@
 package com.demo.weightcard.ui.registartion.registration
 
-import android.graphics.Bitmap
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
@@ -49,13 +48,10 @@ class RegistrationViewModel(
         parentFragment: Fragment?,
         weight: String,
         birthday: String,
-        units:String,
+        units: String,
         photo: String,
     ) = viewModelScope.launch {
         isLoadingVisible.value = true
-        var intFingerId = 0
-
-
         val profile = Profile(
             id.value!!,
             weight,

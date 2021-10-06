@@ -18,7 +18,7 @@ import org.koin.dsl.module
 
 val appModule = module {
     viewModel { RegistrationViewModel(get()) }
-    factory { ProfileRepository(get(), get()) }
+    factory { ProfileRepository(get()) }
     single {
         Realm.init(get())
         Realm.getInstance(RealmConfiguration.Builder().build())

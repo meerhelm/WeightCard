@@ -16,19 +16,26 @@ import com.demo.weightcard.BuildConfig
 import com.demo.weightcard.R
 import com.demo.weightcard.databinding.ScreenPhotoBinding
 import com.demo.weightcard.ui.registartion.RegistrationNavigator
+import com.demo.weightcard.ui.registartion.birthday.ScreenBirthdayViewModel
+import com.demo.weightcard.ui.registartion.registration.RegistrationViewModel
+import com.demo.weightcard.ui.registartion.weight.ScreenWeightViewModel
 import com.demo.weightcard.utils.registrationViewModelDelegate
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import java.io.File
 
 class ScreenPhoto : Fragment(R.layout.screen_photo) {
     private val binding by viewBinding(ScreenPhotoBinding::bind)
     private val viewModel by registrationViewModelDelegate<ScreenPhotoViewModel>()
+    private val birthdayViewModel by registrationViewModelDelegate<ScreenBirthdayViewModel>()
+    private val weightViewModel by registrationViewModelDelegate<ScreenWeightViewModel>()
+    private val registrationViewModel: RegistrationViewModel by sharedViewModel()
     private val registrationNavigator = RegistrationNavigator()
 
     private val takeImageResult =
         registerForActivityResult(ActivityResultContracts.TakePicture()) { isSuccess ->
             if (isSuccess) {
                 latestTmpUri?.let {
-                    viewModel.face.value = it.path
+                    viewModel.face.value = "content://com.demo.weightcard.provider" + it.path
                 }
             }
         }
@@ -54,7 +61,6 @@ class ScreenPhoto : Fragment(R.layout.screen_photo) {
             else -> requestPermissionLauncher.launch(
                 Manifest.permission.CAMERA
             )
-
         }
     }
 
@@ -90,7 +96,7 @@ class ScreenPhoto : Fragment(R.layout.screen_photo) {
         viewModel.face.observe(
             viewLifecycleOwner,
             {
-                if (!it.isNullOrEmpty()) binding.photoImageView.setImageURI(Uri.parse("content://com.demo.weightcard.provider$it"))
+                if (!it.isNullOrEmpty()) binding.photoImageView.setImageURI(Uri.parse(it))
             })
         bindListeners()
     }
@@ -100,7 +106,14 @@ class ScreenPhoto : Fragment(R.layout.screen_photo) {
         binding.camera.setOnClickListener { requestCamera() }
         binding.nextScreen.setOnClickListener {
             if (viewModel.isAllFieldsValid())
-                registrationNavigator.moveToNextScreen(parentFragment)
+                registrationViewModel.saveProfileAndClose(
+                    registrationNavigator,
+                    parentFragment,
+                    weightViewModel.weight.value ?: "",
+                    birthdayViewModel.birthday.value ?: "",
+                    weightViewModel.units.value ?: "",
+                    viewModel.face.value ?: ""
+                )
         }
         binding.prevScreen.setOnClickListener {
             registrationNavigator.moveToPreviousScreen(parentFragment)
