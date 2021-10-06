@@ -25,7 +25,6 @@ class ScreenWeight : Fragment(R.layout.screen_weight) {
     }
 
     private fun bindListeners() {
-
         bindEditTextToViewModel(viewModel.weight, binding.weight)
         binding.nextScreen.setOnClickListener {
             if (viewModel.isAllFieldsValid())

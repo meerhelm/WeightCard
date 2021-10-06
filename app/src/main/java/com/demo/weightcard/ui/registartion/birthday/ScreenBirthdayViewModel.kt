@@ -7,6 +7,7 @@ import com.demo.weightcard.logic.registration_flow.RegistrationViewModelDelegate
 import com.demo.weightcard.model.Profile
 
 class ScreenBirthdayViewModel (profile: Profile? = null) : RegistrationViewModelDelegate() {
+    val weight = MutableLiveData<String>(profile?.weight)
     override fun isAllFieldsValid(): Boolean {
         return getAllLiveData()
             .filterIsInstance<MutableLiveData<String>>()
@@ -14,7 +15,7 @@ class ScreenBirthdayViewModel (profile: Profile? = null) : RegistrationViewModel
     }
 
     override fun getAllLiveData(): List<LiveData<out Any>> {
-        TODO("Not yet implemented")
+       return listOf(weight)
     }
 
 }
